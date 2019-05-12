@@ -15,11 +15,12 @@ import Stars from 'components/Stars';
 export default class RestaurantRow extends Component {
     state = {
         showInfo: false
-    }
+    };
 
     infoPressed = () => {
-        this.setState({ showInfo: !this.state.showInfo })
-    }
+        //this.setState({ showInfo: !this.state.showInfo })
+        this.props.navigation.navigate('Info')
+    };
 
     render() {
 
