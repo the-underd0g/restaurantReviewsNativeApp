@@ -7,11 +7,11 @@
  */
 
 import React, {Component} from 'react';
-import { View, Text, StyleSheet, TextInput, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TextInput, FlatList, Image } from 'react-native';
 import Header from 'components/Header';
 import RestaurantRow from 'components/RestaurantRow';
 import axios from 'axios';
-
+import PizzaImage from 'images/pizza.png';
 
 export default class App extends Component {
   state = {
@@ -27,6 +27,12 @@ export default class App extends Component {
     render() {
     return (
         <View style={{flex: 1}}>
+            <View style={{
+                marginTop: 30,
+                alignItems: 'center'
+            }}>
+                <Image source={PizzaImage}/>
+            </View>
           <Header />
 
           <TextInput
