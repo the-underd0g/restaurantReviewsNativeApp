@@ -12,7 +12,7 @@ import RestaurantList from "./src/components/RestaurantList";
 import RestaurantInfo from "./src/components/RestaurantInfo";
 import About from 'components/About';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import AddReview from 'components/AddReview';
 
 const List = createStackNavigator({
     Home: { screen: RestaurantList },
@@ -30,7 +30,7 @@ const List = createStackNavigator({
     }
 });
 
-export default createBottomTabNavigator({
+const TabNavigatior = createBottomTabNavigator({
     List: { screen: List },
     About: { screen: About}
 },{
@@ -49,5 +49,16 @@ export default createBottomTabNavigator({
                 activeBackgroundColor: '#E6F0FA'
             }
         }
+    }
+});
+
+export default createStackNavigator({
+    Tabs: { screen: TabNavigatior},
+    AddReview: { screen: AddReview}
+}, {
+    mode: 'modal',
+    headerMode: 'none',
+    navigationOptions: {
+        gesturesEnabled: false
     }
 })
