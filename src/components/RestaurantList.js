@@ -8,6 +8,11 @@ import PizzaImage from 'images/pizza.png';
 
 
 export default class RestaurantList extends Component {
+
+    static navigationOptions = {
+        header: null
+    };
+
     state = {
         search: null,
         restaurants: []
@@ -20,14 +25,16 @@ export default class RestaurantList extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{
+                flex: 1,
+                backgroundColor: '#FFFFFF'
+            }}>
                 <View style={{
                     marginTop: 30,
                     alignItems: 'center'
                 }}>
                     <Image source={PizzaImage}/>
                 </View>
-                <Header />
 
                 <TextInput
                     style={styles.input}
