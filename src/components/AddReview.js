@@ -2,31 +2,82 @@ import React, { Component } from 'react';
 
 import {
     View,
-    Text
+    Text,
+    TextInput
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default class AddReview extends Component {
+
+    state = {
+        name: '',
+        rating: 0,
+        comment: ''
+    };
+
     close = () => {
         this.props.navigation.goBack();
     };
 
     render() {
         return(
-            <View>
-                <Text>Add Review</Text>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={this.close}
-                >
-                    <Icon name="close" size={30} color="#0066CC" />
-                </TouchableOpacity>
+            <KeyboardAwareScrollView>
+                <View>
+                    <Text>Add Review</Text>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={this.close}
+                    >
+                        <Icon name="close" size={30} color="#0066CC" />
+                    </TouchableOpacity>
 
-                <Text style={styles.buttonText}>Add Review</Text>
-            </View>
+                    <Text style={styles.buttonText}>Add Review</Text>
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Name (optional)"
+                        value={this.state.name}
+                        onChangeText={name => this.setState({name})}
+
+                    />
+                    <Text style={styles.rating}> Your rating: </Text>
+                    <View style={styles.stars} >
+                        {
+                            [1,2,3,4,5].map(i =>{
+                                return <TouchableOpacity
+                                    onPress={()=> this.setState({rating: i})}
+                                    style={styles.starButton}
+                                    key={i}
+                                >
+                                    <Icon
+                                        name={"star"}
+                                        color={this.state.rating >=i ? "#FFD64C" : "#CCCCCC"}
+                                        size={40}
+                                    />
+                                </TouchableOpacity>
+                            })
+                        }
+                    </View>
+
+                    <TextInput
+                        style={[styles.input, { height : 100 }]}
+                        placeholder="Review"
+                        value={this.state.review}
+                        onChangeText={review => this.setState({review})}
+                        multiline={true}
+                        numberOfLines={5}
+                    />
+
+                    <TouchableOpacity style={styles.submitButton}>
+                        <Text style={styles.submitButtonText}>Submit Review </Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAwareScrollView>
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     root: {
@@ -42,5 +93,40 @@ const styles = StyleSheet.create({
         color: '#444',
         textAlign: 'center',
         margin: 20
+    },
+    input: {
+        padding: 10,
+        marginVertical: 10,
+        marginHorizontal: 20,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 3
+    },
+    rating: {
+        fontSize: 20,
+        color: 'grey',
+        textAlign: 'center',
+        marginVertical: 40
+    },
+    stars: {
+        marginBottom: 80,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    starButton: {
+        padding: 5
+    },
+    submitButton: {
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        backgroundColor: '#0066cc',
+        borderRadius: 4,
+        marginVertical: 10,
+        marginHorizontal: 20
+    },
+    submitButtonText: {
+        fontSize: 18,
+        color: '#ffffff',
+        textAlign: 'center'
     }
-});
+})
